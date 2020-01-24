@@ -1,16 +1,13 @@
-let money = 25000,
-	income = 10000,
-	addExpenses = 'Комуналка, Проезд, Подарки, Посиделки, Встречи',
-	deposit = false,
-	mission = 70000,
-	period = 6;
-let budgetDay = money / 30;
+let num = 266219,
+		result;
 
-console.log(typeof(money));
-console.log(typeof(income));
-console.log(typeof(deposit));
-console.log(addExpenses.length);
-console.log('Период равен ' + period + ' месяцев');
-console.log('Цель заработать ' + mission + ' рублей');
-console.log(addExpenses.toLowerCase().split(', '));
-console.log(budgetDay);
+let arr = String(num).split('');
+
+	result = arr.reduce(function(mult, cur) {
+		return mult * cur;
+	});
+
+	console.log(result);
+	result **= 3;
+	console.log(result);
+	console.log(String(result).substr(0, 2));
