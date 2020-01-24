@@ -1,11 +1,11 @@
-	let money;
-	let income;
-	let addExpenses;
-	let deposit;
-	let mission;
-	let period;
+let money, 
+		income, 
+		addExpenses, 
+		deposit, 
+		mission, 
+		period;
 
 
-	alert("первый урок");
+	alert("второй урок");
 	// 
 	console.log("сообщение в консоль");
