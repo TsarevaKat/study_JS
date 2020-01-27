@@ -1,13 +1,34 @@
-let num = 266219,
-		result;
+let lang = prompt('Выберете язык / Choose a language (ru/en)', 'ru');
 
-let arr = String(num).split('');
+let weekRu = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
+	weekEn = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
-	result = arr.reduce(function(mult, cur) {
-		return mult * cur;
-	});
+// a
+if (lang === 'ru') {
+	console.log('Дни недели: ', weekRu);
+} else if (lang === 'en') {
+	console.log('Days of week: ', weekEn);
+} else {
+	console.log('Язык не найден / Language not found');
+}
 
-	console.log(result);
-	result **= 3;
-	console.log(result);
-	console.log(String(result).substr(0, 2));
+// b 
+switch (lang) {
+	case 'ru':
+		console.log('Дни недели: ', weekRu);
+		break;
+	case 'en':
+		console.log('Days of week: ', weekEn);
+		break;
+	default:
+		console.log('Язык не найден / Language not found');
+}
+// c
+let languages = [weekRu, weekEn];
+let indexLang = (lang === 'ru') ? 0 : ((lang === 'en') ? 1 : console.log('Язык не найден / Language not found'));
+console.log('Дни недели / Days of week: ', languages[indexLang]);
+
+
+// 2
+let namePerson = prompt('Введите имя');
+let statusPerson = (namePerson === 'Артем') ? console.log('директор') : ((namePerson === 'Максим') ? console.log('преподаватель') : console.log('студент'));
