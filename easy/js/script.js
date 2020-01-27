@@ -14,7 +14,6 @@ console.log(addExpenses.length);
 console.log('Период равен `${period}` месяцев');
 console.log('Цель заработать `${mission}` рублей');
 console.log(addExpenses.toLowerCase().split(', '));
-console.log(budgetDay);
 
 let expenses1 = prompt('Введите обязательную статью расходов?'),
 	amount1 = +prompt('Во сколько это обойдется?'),
