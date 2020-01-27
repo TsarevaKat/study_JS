@@ -6,7 +6,6 @@ let money = +prompt('Ваш месячный доход?'),
 	deposit = confirm('Есть ли у вас депозит в банке?'),
 	mission = 70000,
 	period = 6;
-let budgetDay = money / 30;
 
 console.log(typeof(money));
 console.log(typeof(income));
@@ -28,14 +27,14 @@ console.log('На пожить (бюджет на месяц): ', budgetMonth);
 
 console.log('До цели ползти: ' + Math.ceil(mission / budgetMonth) + ' месяцев');
 
-budgetDay = Math.floor(budgetMonth / 30);
+let budgetDay = Math.floor(budgetMonth / 30);
 console.log('Денюжек в день: ', budgetDay);
 
 if (budgetDay >= 1200) {
 	console.log('У вас высокий уровень дохода');
-} else if (budgetDay <= 1200 && budgetDay >= 600) {
+} else if (budgetDay < 1200 && budgetDay >= 600) {
 	console.log('У вас средний уровень дохода');
-} else if (budgetDay <= 600 && budgetDay >= 0) {
+} else if (budgetDay < 600 && budgetDay >= 0) {
 	console.log('К сожалению у вас уровень дохода ниже среднего');
 } else {
 	console.log('Что то пошло не так');
