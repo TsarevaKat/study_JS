@@ -1,6 +1,6 @@
 let lang = prompt('Выберете язык / Choose a language (ru/en)', 'ru');
 
-let weekRu = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
+const weekRu = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
   weekEn = ['mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
 
 // a
