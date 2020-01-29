@@ -1,19 +1,34 @@
-let userString = prompt('Введите строку');
+const isNumber = function (n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
 
-function processingString(str) {
-  if (typeof(str) !== 'string') {
-    console.log('Это не строка');
-  } else {
-    // первый вариант
-    console.log(str.trim());
-    // второй вариант через регулярку
-    console.log(str.replace(/^\s*/, '').replace(/\s*$/, ''));
-  }
-  if (str.length > 30) {
-    str = str.substr(0, 29);
-    str += '...';
-    console.log(str);
+const arr = [];
+
+for (let i = 0; i < 7; i++) {
+  do {
+    arr[i] = prompt(`Введиите число (${i + 1}-ое)`);
+  } while (!isNumber(arr[i]));
+}
+
+// console.log(arr);
+
+for (let i = 0; i < 7; i++) {
+  if (arr[i].match(/^2/) || arr[i].match(/^4/)) {
+    console.log(arr[i]);
   }
 }
 
-processingString(userString);
+for (let i = 2; i <= 100; i++) {
+  let simpleNumber = true;
+
+  for (let j = 2; j < i; j++) {
+    if (i % j === 0) {
+      simpleNumber = false;
+      break;
+    }
+  }
+
+  if (simpleNumber) {
+    console.log(i, `Делители этого числа: 1 и ${i}`);
+  }
+}
