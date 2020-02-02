@@ -10,11 +10,11 @@ for (let i = 0; i < 7; i++) {
   } while (!isNumber(arr[i]));
 }
 
-// console.log(arr);
+console.log(arr);
 
-for (let i = 0; i < 7; i++) {
-  if (arr[i].match(/^2/) || arr[i].match(/^4/)) {
-    console.log(arr[i]);
+for (let item of arr) {
+  if (item.match(/^2/) || item.match(/^4/)) {
+    console.log(item);
   }
 }
 

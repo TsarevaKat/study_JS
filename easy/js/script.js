@@ -38,14 +38,14 @@ function getExpensesMonth() {
 }
 
 start();
-
 let expensesAmount = getExpensesMonth();
-const accumulatedMonth = getAccumulatedMonth();
-const budgetDay = Math.floor(accumulatedMonth / 30);
 
 function getAccumulatedMonth() {
   return money - expensesAmount;
-}
+  }
+
+const accumulatedMonth = getAccumulatedMonth();
+const budgetDay = Math.floor(accumulatedMonth / 30);
 
 function getTargetMonth() {
   let target = Math.ceil(mission / accumulatedMonth);
