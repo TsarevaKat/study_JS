@@ -1,13 +1,13 @@
 'use strict';
 let money;
 const isNumber = function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-},
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  },
   start = function () {
     do {
-      money = prompt('Ваш месячный доход?');
+      money = +prompt('Ваш месячный доход?');
     } while (!isNumber(money));
-  }
+  };
 
 start();
 
@@ -20,6 +20,9 @@ let appData = {
   deposit: false,
   mission: 70000,
   period: 6,
+  budgetDay: 0,
+  budgetMonth: 0,
+  expensesMonth: 0,
   asking: function () {
     const addExpenses = prompt('Перечислите возможные расходы через запятую');
     appData.addExpenses = addExpenses.toLowerCase().split(', ');
@@ -29,13 +32,11 @@ let appData = {
       let amount;
       do {
         amount = prompt('Во сколько это обойдется?');
-        appData.expenses[expense] = +amount;
       } while (!isNumber(amount));
+      appData.expenses[expense] = +amount;
     }
   },
-  budgetDay: 0,
-  budgetMonth: 0,
-  expensesMonth: 0,
+
   getExpensesMonth: function () {
     for (let key in appData.expenses) {
       appData.expensesMonth += appData.expenses[key];
@@ -65,7 +66,7 @@ let appData = {
       console.log('К сожалению у вас уровень дохода ниже среднего');
     } else {
       console.log('Что то пошло не так');
-    }  
+    }
   }
 };
 
