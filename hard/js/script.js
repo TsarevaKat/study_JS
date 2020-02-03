@@ -1,21 +1,16 @@
-const week = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
-let date = new Date();
-console.log('date: ', date);
-console.log(date.getDay());
+'use strict';
+const week = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
+  date = new Date();
 
-for (let item of week) {
-  let div = document.createElement('div');
-  div.innerHTML = item;
+week.forEach(function (item) {
+  const div = document.createElement('div');
+  div.textContent = item;
   if (item === 'вс' || item === 'сб') {
-    div.style.cssText = 'font-style: italic';
+    div.classList.add('weekend');
   }
+
   if (item === week[date.getDay()]) {
-    div.style.cssText = 'font-weight: 700;';
+    div.classList.add('new');
   }
-  if ((item === 'вс' || item === 'сб') && item === week[date.getDay()]) {
-    div.style.cssText = 'font-style: italic;font-weight: 700;';
-
-  }
-  document.body.append(div);
-}
-
+  document.body.appendChild(div);
+})
