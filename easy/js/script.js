@@ -123,20 +123,20 @@ let appData = {
   }
 };
 
-// appData.asking();
+appData.asking();
 
-// appData.getExpensesMonth();
-// appData.getBudget();
-// console.log('Расходы за месяц: ', appData.expensesMonth);
-// appData.getTargetMonth();
-// appData.getStatusIncome();
+appData.getExpensesMonth();
+appData.getBudget();
+console.log('Расходы за месяц: ', appData.expensesMonth);
+appData.getTargetMonth();
+appData.getStatusIncome();
 
-// for (let key in appData) {
-//   console.log('Наша программа включает в себя данные:');
-//   console.log(`${key}: ${appData[key]}`);
-// }
+for (let key in appData) {
+  console.log('Наша программа включает в себя данные:');
+  console.log(`${key}: ${appData[key]}`);
+}
 
-// appData.getExpenses();
+appData.getExpenses();
 
 const btnStart = document.getElementById('start'),
       btnAddIncome = document.getElementsByTagName('button')[0],
