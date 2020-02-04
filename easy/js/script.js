@@ -57,7 +57,6 @@ let appData = {
       let itemExpenses, cashExpenses;
       do {
         itemExpenses = prompt('Введите обязательную статью расходов?', 'квартира');
-        console.log('itemExpenses: ', itemExpenses);
       } while (!isText(itemExpenses));
       do {
         cashExpenses = prompt('Во сколько это обойдется?', 5000);
@@ -129,7 +128,6 @@ appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
 console.log('Расходы за месяц: ', appData.expensesMonth);
-// console.log('Денюжек в день: ', appData.budgetDay);
 appData.getTargetMonth();
 appData.getStatusIncome();
 
