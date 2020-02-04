@@ -123,17 +123,35 @@ let appData = {
   }
 };
 
-appData.asking();
+// appData.asking();
 
-appData.getExpensesMonth();
-appData.getBudget();
-console.log('Расходы за месяц: ', appData.expensesMonth);
-appData.getTargetMonth();
-appData.getStatusIncome();
+// appData.getExpensesMonth();
+// appData.getBudget();
+// console.log('Расходы за месяц: ', appData.expensesMonth);
+// appData.getTargetMonth();
+// appData.getStatusIncome();
 
-for (let key in appData) {
-  console.log('Наша программа включает в себя данные:');
-  console.log(`${key}: ${appData[key]}`);
-}
+// for (let key in appData) {
+//   console.log('Наша программа включает в себя данные:');
+//   console.log(`${key}: ${appData[key]}`);
+// }
 
-appData.getExpenses();
+// appData.getExpenses();
+
+const btnStart = document.getElementById('start'),
+      btnAddIncome = document.getElementsByTagName('button')[0],
+      btnAddExpenses = document.getElementsByTagName('button')[1],
+      checkDeposid = document.querySelector('#deposit-check'),
+      incomeItems = document.querySelectorAll('.additional_income-item'),
+      resultInputs = document.querySelectorAll('[class*="-value"]'),
+      salaryAmont = document.querySelector('.salary-amount'),
+      incomeTitle = document.querySelector('.income-title'),
+      expensesTitle = document.querySelector('.expenses-title'),
+      expensesAmount = document.querySelector('.expenses-amount'),
+      expensesItem = document.querySelector('.additional_expenses-item'),
+      depositBank = document.querySelector('.deposit-bank'),
+      depositAmount = document.querySelector('.deposit-amount'),
+      depositPercent = document.querySelector('.deposit-percent'),
+      targetAmount = document.querySelector('.target-amount'),
+      periodSelect = document.querySelector('.period-select'),
+      periodAmount = document.querySelector('.period-amount');
