@@ -4,7 +4,7 @@ const isNumber = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   },
   isText = function (n) {
-    if (/\d/.test(n) || n.trim() === '') {
+    if (/\d/.test(n) || n === null || n.trim() === '') {
       return false;
     } else {
       return true;
@@ -48,7 +48,8 @@ let appData = {
     let addExpenses;
     do {
       addExpenses= prompt('Перечислите возможные расходы через запятую');
-    } while (addExpenses.trim() === '');
+    }
+    while ( addExpenses === null || addExpenses.trim() === '');
     appData.addExpenses = addExpenses.toLowerCase().split(', ');
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
     appData.getInfoDeposit();
