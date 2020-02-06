@@ -22,6 +22,13 @@ book5List.insertBefore(book5Section[2], book5Section[6]);
 book5List.insertBefore(book5Section[5], book5Section[8]);
 book5List.insertBefore(book5Section[9], book5Section[3]);
 
+const book2Section = book[0].querySelectorAll('li'),
+  book2List = book[0].querySelector('ul');
+
+book2List.insertBefore(book2Section[2], book2Section[10]);
+book2List.insertBefore(book2Section[6], book2Section[4]);
+book2List.insertBefore(book2Section[8], book2Section[4]);
+
 const book6Section = book[2].querySelectorAll('li'),
   book6List = book[2].querySelector('ul'),
   newSection = book6Section[9].cloneNode();
