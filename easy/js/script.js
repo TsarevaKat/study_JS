@@ -8,7 +8,7 @@ books.insertBefore(book[4], book[2]);
 books.removeChild(book[2]);
 books.appendChild(book[2]);
 
-body.style.cssText = 'background-image:url("../image/you-dont-know-js.jpg")';
+body.style.cssText = 'background-image:url("./image/you-dont-know-js.jpg")';
 
 const title = book[4].querySelector('h2 a');
 title.textContent = 'Книга 3. this и Прототипы Объектов';
