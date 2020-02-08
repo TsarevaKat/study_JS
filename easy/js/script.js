@@ -4,10 +4,10 @@ const isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 },
   isText = function (n) {
-    if (/\d/.test(n) || n === null || n.trim() === '') {
-      return false;
-    } else {
+    if (/^[?!,.а-яА-ЯёЁ\s]+$/.test(n)) {
       return true;
+    } else {
+      return false;
     }
   };
 
@@ -28,7 +28,9 @@ let btnStart = document.getElementById('start'),
   depositPercent = document.querySelector('.deposit-percent'),
   targetAmount = document.querySelector('.target-amount'),
   periodSelect = document.querySelector('.period-select'),
-  periodAmount = document.querySelector('.period-amount');
+  periodAmount = document.querySelector('.period-amount'),
+  textInputs = document.querySelectorAll('input[placeholder="Наименование"]'),
+  sumInputs = document.querySelectorAll('input[placeholder="Сумма"]');
 
 
 let appData = {
@@ -79,10 +81,15 @@ let appData = {
   },
   // добавление обязательных расходов по кнопке +
   addExpennsesBlock: function () {
-    const cloneExpensesItem = expensesItems[0].cloneNode(true);
+    const cloneExpensesItem = expensesItems[0].cloneNode(true),
+      inputs = cloneExpensesItem.querySelectorAll('input');
+    inputs.forEach(function (item) {
+      item.value = '';
+    });
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, btnAddExpenses);
     expensesItems = document.querySelectorAll('.expenses-items');
-    console.log('expensesItems: ', expensesItems);
+    textInputs = document.querySelectorAll('input[placeholder="Наименование"]'),
+      sumInputs = document.querySelectorAll('input[placeholder="Сумма"]');
     if (expensesItems.length === 3) {
       btnAddExpenses.style.display = 'none';
     }
@@ -115,9 +122,17 @@ let appData = {
   },
   // добавляем дополнительные доходы по кнопке +
   addIncomeBlock: function () {
-    const cloneIncomeItem = incomeItems[0].cloneNode(true);
+    const cloneIncomeItem = incomeItems[0].cloneNode(true),
+      inputs = cloneIncomeItem.querySelectorAll('input');
+    inputs.forEach(function (item) {
+      item.value = '';
+    });
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem, btnAddIncome);
     incomeItems = document.querySelectorAll('.income-items');
+    textInputs = document.querySelectorAll('input[placeholder="Наименование"]');
+    sumInputs = document.querySelectorAll('input[placeholder="Сумма"]');
+    appData.validateInputText();
+    appData.validateInputNumb();
     if (incomeItems.length === 3) {
       btnAddIncome.style.display = 'none';
     }
@@ -202,6 +217,24 @@ let appData = {
     } else {
       btnStart.disabled = true;
     }
+  },
+  validateInputText: function () {
+    textInputs.forEach(function (item) {
+      item.addEventListener('change', function () {
+        if (!isText(item.value)) {
+          item.value = '';
+        }
+      })
+    });
+  },
+  validateInputNumb: function () {
+    sumInputs.forEach(function (item) {
+      item.addEventListener('change', function () {
+        if (!isNumber(item.value)) {
+          item.value = '';
+        }
+      })
+    });
   }
   // getExpensesString: function () {
   //   const arr = appData.addExpenses.map(function (item) {
@@ -214,8 +247,10 @@ let appData = {
 btnStart.disabled = true;
 
 salaryAmont.addEventListener('input', appData.btnDisabled);
-btnStart.addEventListener('click', appData.start)
+btnStart.addEventListener('click', appData.start);
 
+appData.validateInputText();
+appData.validateInputNumb();
 btnAddExpenses.addEventListener('click', appData.addExpennsesBlock);
 btnAddIncome.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.getPeriod);
