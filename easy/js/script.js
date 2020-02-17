@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // расчет бюджета на  месяц и на день
     getBudget() {
       const monthDeposite = this.moneyDeposite * (this.percentDeposit / 100);
+      console.log(monthDeposite);
       this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposite;
       this.budgetDay = Math.floor(this.budgetMonth / 30);
     }
@@ -226,11 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // условия вклада
     getInfoDeposit() {
-      if (this.deposit) {
+      if (this.deposit && depositPercent.value !== '' && depositAmount.value !== '') {
         this.percentDeposit = depositPercent.value;
         this.moneyDeposite = depositAmount.value;
       }
-    }
+    }git 
 
     // расчет накоплений за период
     calcPeriod() {
@@ -288,6 +289,13 @@ document.addEventListener('DOMContentLoaded', () => {
       this.moneyDeposite = 0;
 
       salaryAmont.value = '';
+      depositBank.style.display = 'none';
+      depositAmount.style.display = 'none';
+      depositPercent.style.display = 'none';
+      depositBank.value = '';
+      depositAmount.value = '';
+      depositBank.removeEventListener('change', this.changePercent);
+      depositPercent.removeEventListener('change', this.validatePercent);
 
       while (incomeItems.length > 1) {
         console.log('incomeItems.length: ', incomeItems.length);
