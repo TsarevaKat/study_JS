@@ -56,7 +56,7 @@ const AppData = function () {
   this.percentDeposit = 0;
   this.moneyDeposite = 0;
 
-}
+};
 
 AppData.prototype.start = function () {
 
@@ -339,7 +339,7 @@ AppData.prototype.eventListeners = function () {
   let start = _this.start.bind(_this);
   btnStart.addEventListener('click', start);
   
-  let reset = appData.reset.bind(_this);
+  let reset = _this.reset.bind(_this);
   btnReset.addEventListener('click', reset);
 
   this.validateInputText();
@@ -351,7 +351,7 @@ AppData.prototype.eventListeners = function () {
   let addIncome = _this.addIncomeBlock.bind(_this);
   btnAddIncome.addEventListener('click', addIncome);
   periodSelect.addEventListener('input', this.getPeriod);
-}
+};
 
 const appData = new AppData();
 
