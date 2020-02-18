@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.percentDeposit = depositPercent.value;
         this.moneyDeposite = depositAmount.value;
       }
-    }git 
+    }
 
     // расчет накоплений за период
     calcPeriod() {
