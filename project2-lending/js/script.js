@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
         timerSeconds.textContent = '00';
       }
     }
-    let timerOn = setInterval(upDateClock, 1000);
+    const timerOn = setInterval(upDateClock, 1000);
   }
 
 
