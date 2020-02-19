@@ -10,7 +10,6 @@ function upDate() {
     hours = date.getHours(),
     newYear = new Date(2020, 11, 31).getTime(),
     dayForNewYear = Math.floor((newYear - date.getTime()) / 1000 / 60 / 60 / 24);
-    console.log('hours: ', hours);
 
   function time(num) {
     if (num < 10) {

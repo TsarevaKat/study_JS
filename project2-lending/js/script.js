@@ -33,20 +33,16 @@ window.addEventListener('DOMContentLoaded', () => {
       timerMinutes.textContent = timeFormat(timer.minutes);
       timerSeconds.textContent = timeFormat(timer.seconds);
 
-
-      if (timer.timeRemaining > 0) {
-        upDateClock();
-      } else {
+      if (timer.timeRemaining <= 0) {
         clearInterval(timerOn);
         timerHours.textContent = '00';
         timerMinutes.textContent = '00';
         timerSeconds.textContent = '00';
-  
       }
     }
     let timerOn = setInterval(upDateClock, 1000);
   }
 
 
-  countTimer('1 february 2020');
+  countTimer('20 february 2020');
 });
