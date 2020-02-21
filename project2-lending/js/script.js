@@ -63,10 +63,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     menuItems.forEach(item => item.addEventListener('click', hendlerMenu));
   };
+
   toggleMenu();
 
   // popup 
-  const toggelPopup = () => {
+  const togglPopup = () => {
     const popup = document.querySelector('.popup'),
       btnPopup = document.querySelectorAll('.popup-btn'),
       btnClosePopup = popup.querySelector('.popup-close');
@@ -125,6 +126,43 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  toggelPopup();
+  togglPopup();
 
+  // btn Down 
+  const toggleBtnDown = () => {
+    const main = document.querySelector('main'),
+      btnDown = main.querySelector('a');
+
+    const scrollBlock = () => {
+      const href = btnDown.getAttribute('href'),
+        blockForScroll = document.querySelector(href),
+        topBlock = blockForScroll.offsetTop;
+
+      const scroll = () => {
+        window.scrollBy(0, 8);
+        if (window.pageYOffset < topBlock) {
+          requestAnimationFrame(scroll);
+        }
+      };
+
+      scroll();
+
+    };
+
+    btnDown.addEventListener('mouseenter', () => {
+      btnDown.style.transform = 'translateY(20px)';
+    });
+
+    btnDown.addEventListener('mouseleave', () => {
+      btnDown.style.transform = 'translateY(0)';
+    });
+
+    btnDown.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollBlock();
+    });
+
+  };
+
+  toggleBtnDown();
 });
