@@ -1,13 +1,12 @@
-
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
   // Timer
-  function countTimer(deadline) {
+  const countTimer = (deadline) => {
     let timerHours = document.querySelector('#timer-hours'),
       timerMinutes = document.querySelector('#timer-minutes'),
       timerSeconds = document.querySelector('#timer-seconds');
 
-    function getTimeRemaining() {
+    const getTimeRemaining = () => {
       let
         dateStop = new Date(deadline).getTime(),
         dateNow = new Date().getTime(),
@@ -16,17 +15,22 @@ window.addEventListener('DOMContentLoaded', () => {
         hours = Math.floor(timeRemaining / 60 / 60) % 24,
         minutes = Math.floor((timeRemaining / 60) % 60),
         seconds = Math.floor(timeRemaining % 60);
-      return { timeRemaining, hours, minutes, seconds };
-    }
+      return {
+        timeRemaining,
+        hours,
+        minutes,
+        seconds
+      };
+    };
 
-    function timeFormat(num) {
+    const timeFormat = (num) => {
       if (num < 10) {
         num = '0' + num;
       }
       return num;
-    }
+    };
 
-    function upDateClock() {
+    const upDateClock = setInterval(() => {
       let timer = getTimeRemaining();
 
       timerHours.textContent = timeFormat(timer.hours);
@@ -34,15 +38,93 @@ window.addEventListener('DOMContentLoaded', () => {
       timerSeconds.textContent = timeFormat(timer.seconds);
 
       if (timer.timeRemaining <= 0) {
-        clearInterval(timerOn);
+        clearInterval(upDateClock);
         timerHours.textContent = '00';
         timerMinutes.textContent = '00';
         timerSeconds.textContent = '00';
       }
-    }
-    const timerOn = setInterval(upDateClock, 1000);
-  }
+    }, 1000);
+  };
 
+  countTimer('24 february 2020');
 
-  countTimer('20 february 2020');
+  // menu 
+  const toggleMenu = () => {
+    const btnMenu = document.querySelector('.menu'),
+      menu = document.querySelector('menu'),
+      btnCloseMenu = document.querySelector('.close-btn'),
+      menuItems = menu.querySelectorAll('ul>li');
+    const hendlerMenu = () => {
+      menu.classList.toggle('active-menu');
+    };
+
+    btnMenu.addEventListener('click', hendlerMenu);
+    btnCloseMenu.addEventListener('click', hendlerMenu);
+
+    menuItems.forEach(item => item.addEventListener('click', hendlerMenu));
+  };
+  toggleMenu();
+
+  // popup 
+  const toggelPopup = () => {
+    const popup = document.querySelector('.popup'),
+      btnPopup = document.querySelectorAll('.popup-btn'),
+      btnClosePopup = popup.querySelector('.popup-close');
+
+    const popupOpen = () => {
+      let start = Date.now();
+      const open = setInterval(() => {
+        let time = Date.now() - start;
+        if (time >= 1000) {
+          popup.style.transform = `translateY(0)`;
+          popup.style.opacity = 1;
+          clearInterval(open);
+          return;
+        }
+        let top = 100 - (time / 10),
+          opacity = time / 1000;
+        popup.style.transform = `translateY(-${top}%)`;
+        popup.style.opacity = opacity;
+      }, 0);
+    };
+
+    const popupClose = () => {
+      let start = Date.now();
+      const close = setInterval(() => {
+        let time = Date.now() - start;
+        if (time >= 1000) {
+          popup.style.transform = `translateY(-100%)`;
+          popup.style.opacity = 0;
+          popup.style.display = 'none';
+          clearInterval(close);
+          return;
+        }
+        let top = (time / 10),
+          opacity = 1 - (time / 1000);
+        popup.style.transform = `translateY(-${top}%)`;
+        popup.style.opacity = opacity;
+      }, 0);
+    };
+
+    btnPopup.forEach((item) => {
+      item.addEventListener('click', () => {
+        popup.style.display = 'block';
+        if (screen.width >= 768) {
+          popup.style.transform = 'translateY(-100%)';
+          popupOpen();
+        }
+      });
+    });
+
+    btnClosePopup.addEventListener('click', () => {
+      if (screen.width >= 768) {
+        popupClose();
+      } else {
+        popup.style.display = 'none';
+      }
+    });
+  };
+
+  toggelPopup();
+
 });
