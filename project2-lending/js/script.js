@@ -51,17 +51,21 @@ window.addEventListener('DOMContentLoaded', () => {
   // menu 
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
-      menu = document.querySelector('menu'),
-      btnCloseMenu = document.querySelector('.close-btn'),
-      menuItems = menu.querySelectorAll('ul>li');
+      menu = document.querySelector('menu');
+
+
     const hendlerMenu = () => {
       menu.classList.toggle('active-menu');
     };
 
     btnMenu.addEventListener('click', hendlerMenu);
-    btnCloseMenu.addEventListener('click', hendlerMenu);
 
-    menuItems.forEach(item => item.addEventListener('click', hendlerMenu));
+    menu.addEventListener('click', (event) => {
+      let target = event.target;
+      if (target.classList.contains('close-btn') || target.matches('ul>li>a')) {
+        hendlerMenu();
+      }
+    });
   };
 
   toggleMenu();
@@ -69,59 +73,69 @@ window.addEventListener('DOMContentLoaded', () => {
   // popup 
   const togglPopup = () => {
     const popup = document.querySelector('.popup'),
-      btnPopup = document.querySelectorAll('.popup-btn'),
-      btnClosePopup = popup.querySelector('.popup-close');
+      btnPopup = document.querySelectorAll('.popup-btn');
 
     const popupOpen = () => {
-      let start = Date.now();
-      const open = setInterval(() => {
-        let time = Date.now() - start;
-        if (time >= 1000) {
-          popup.style.transform = `translateY(0)`;
-          popup.style.opacity = 1;
-          clearInterval(open);
-          return;
-        }
-        let top = 100 - (time / 10),
-          opacity = time / 1000;
-        popup.style.transform = `translateY(-${top}%)`;
-        popup.style.opacity = opacity;
-      }, 0);
+      popup.style.display = 'block';
+      if (screen.width >= 768) {
+        popup.style.transform = 'translateY(-100%)';
+        let start = Date.now();
+        const open = setInterval(() => {
+          let time = Date.now() - start;
+          if (time >= 1000) {
+            popup.style.transform = `translateY(0)`;
+            popup.style.opacity = 1;
+            clearInterval(open);
+            return;
+          }
+          let top = 100 - (time / 10),
+            opacity = time / 1000;
+          popup.style.transform = `translateY(-${top}%)`;
+          popup.style.opacity = opacity;
+        }, 0);
+      }
     };
 
     const popupClose = () => {
-      let start = Date.now();
-      const close = setInterval(() => {
-        let time = Date.now() - start;
-        if (time >= 1000) {
-          popup.style.transform = `translateY(-100%)`;
-          popup.style.opacity = 0;
-          popup.style.display = 'none';
-          clearInterval(close);
-          return;
-        }
-        let top = (time / 10),
-          opacity = 1 - (time / 1000);
-        popup.style.transform = `translateY(-${top}%)`;
-        popup.style.opacity = opacity;
-      }, 0);
+      if (screen.width <= 768) {
+        popup.style.display = 'none';
+      } else {
+        let start = Date.now();
+        const close = setInterval(() => {
+          let time = Date.now() - start;
+          if (time >= 1000) {
+            popup.style.transform = `translateY(-100%)`;
+            popup.style.opacity = 0;
+            popup.style.display = 'none';
+            clearInterval(close);
+            return;
+          }
+          let top = (time / 10),
+            opacity = 1 - (time / 1000);
+          popup.style.transform = `translateY(-${top}%)`;
+          popup.style.opacity = opacity;
+        }, 0);
+      }
+
     };
 
     btnPopup.forEach((item) => {
       item.addEventListener('click', () => {
-        popup.style.display = 'block';
-        if (screen.width >= 768) {
-          popup.style.transform = 'translateY(-100%)';
-          popupOpen();
-        }
+        popupOpen();
       });
     });
 
-    btnClosePopup.addEventListener('click', () => {
-      if (screen.width >= 768) {
+    popup.addEventListener('click', (event) => {
+      let target = event.target;
+
+      if (target.classList.contains('popup-close')) {
         popupClose();
       } else {
-        popup.style.display = 'none';
+        target = target.closest('.popup-content');
+
+        if (!target) {
+          popupClose();
+        }
       }
     });
   };
@@ -165,4 +179,39 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   toggleBtnDown();
+
+  // tabs 
+  const tabs = () => {
+    const tabHeader = document.querySelector('.service-header'),
+      tab = tabHeader.querySelectorAll('.service-header-tab'),
+      tabContent = document.querySelectorAll('.service-tab');
+
+    const toggleTabContent = (index) => {
+      for (let i = 0; i < tabContent.length; i++) {
+        if (index === i) {
+          tab[i].classList.add('active');
+          tabContent[i].classList.remove('d-none');
+        } else {
+          tab[i].classList.remove('active');
+          tabContent[i].classList.add('d-none');
+        }
+      }
+    };
+
+    tabHeader.addEventListener('click', (event) => {
+      let target = event.target;
+      target = target.closest('.service-header-tab');
+
+      if (target.classList.contains('service-header-tab')) {
+        tab.forEach((item, i) => {
+          if (item === target) {
+            toggleTabContent(i);
+          }
+        });
+      }
+    });
+  };
+
+  tabs();
+
 });
