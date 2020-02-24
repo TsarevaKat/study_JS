@@ -131,7 +131,6 @@ window.addEventListener('DOMContentLoaded', () => {
         popupClose();
       } else {
         target = target.closest('.popup-content');
-
         if (!target) {
           popupClose();
         }
@@ -228,9 +227,9 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     dotsAdd();
-    
+
     const dot = slider.querySelectorAll('.dot');
-    
+
     let currentSlide = 0,
       interval;
 
@@ -318,5 +317,37 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   slider();
+
+  // смена картинки
+  const commandPhotoHover = () => {
+    const command = document.getElementById('command');
+    const imgHover = (e) => {
+      const target = e.target;
+      if (target.matches('.command__photo')) {
+        let tmp = target.src;
+        console.log('tmp: ', tmp);
+        target.src = target.dataset.img;
+        target.dataset.img = tmp;
+      }
+    }
+    command.addEventListener('mouseover', imgHover);
+    command.addEventListener('mouseout', imgHover);
+  };
+
+  commandPhotoHover();
+
+  // calc 
+  const calcValid = () => {
+    const calc = document.querySelector('.calc-block');
+
+    calc.addEventListener('input', (e) => {
+      const target = e.target;
+      if (target.matches('input.calc-item')) {
+        target.value = target.value.replace(/[\D]/, '');
+      }
+    })
+  };
+
+  calcValid();
 
 });
