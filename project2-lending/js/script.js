@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   };
 
-  countTimer('24 february 2020');
+  countTimer('29 february 2020');
 
   // menu 
   const toggleMenu = () => {
@@ -325,11 +325,10 @@ window.addEventListener('DOMContentLoaded', () => {
       const target = e.target;
       if (target.matches('.command__photo')) {
         let tmp = target.src;
-        console.log('tmp: ', tmp);
         target.src = target.dataset.img;
         target.dataset.img = tmp;
       }
-    }
+    };
     command.addEventListener('mouseover', imgHover);
     command.addEventListener('mouseout', imgHover);
   };
@@ -345,9 +344,53 @@ window.addEventListener('DOMContentLoaded', () => {
       if (target.matches('input.calc-item')) {
         target.value = target.value.replace(/[\D]/, '');
       }
-    })
+    });
   };
 
   calcValid();
+
+  const calc = (price = 100) => {
+
+    const calcBlock = document.querySelector('.calc-block'),
+      calсType = document.querySelector('.calc-type'),
+      clacSquare = document.querySelector('.calc-square'),
+      clacCount = document.querySelector('.calc-count'),
+      clacDay = document.querySelector('.calc-day'),
+      totalValue = document.getElementById('total');
+
+    const countSum = () => {
+      let total = 0, 
+          countValue = 1,
+          dayValue = 10;
+      const typeValue = calсType.options[calсType.selectedIndex].value,
+        squareValue = +clacSquare.value;
+      
+      if (clacCount.value > 1) {
+        countValue += (clacCount.value - 1) / 10;
+      }
+
+      if (clacDay && clacDay.value < 5) {
+        dayValue *= 2;
+      } else if (clacDay && clacDay.value < 10) {
+        dayValue *= 1.5;
+      }
+
+      if (typeValue && squareValue) {
+        total = price * typeValue * squareValue * countValue * dayValue;
+      }
+
+      totalValue.textContent = total;
+    };
+
+    calcBlock.addEventListener('change', (e) => {
+      const target = e.target;
+
+      if (target.matches('select') || target.matches('input')) {
+        countSum();
+      }
+    });
+  };
+
+  calc(100);
 
 });
