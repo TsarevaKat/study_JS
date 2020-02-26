@@ -359,19 +359,19 @@ window.addEventListener('DOMContentLoaded', () => {
       totalValue = document.getElementById('total');
 
     const countSum = () => {
-      let total = 0, 
-          countValue = 1,
-          dayValue = 10;
+      let total = 0,
+        countValue = 1,
+        dayValue = 1;
       const typeValue = calсType.options[calсType.selectedIndex].value,
         squareValue = +clacSquare.value;
-      
+
       if (clacCount.value > 1) {
         countValue += (clacCount.value - 1) / 10;
       }
 
-      if (clacDay && clacDay.value < 5) {
+      if (clacDay.value && clacDay.value < 5) {
         dayValue *= 2;
-      } else if (clacDay && clacDay.value < 10) {
+      } else if (clacDay.value && clacDay.value < 10) {
         dayValue *= 1.5;
       }
 
