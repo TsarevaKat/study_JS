@@ -128,13 +128,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   togglPopup();
 
-  // btn Down 
-  const toggleBtnDown = () => {
+  // scroll
+  const toggleScroll = () => {
     const main = document.querySelector('main'),
-      btnDown = main.querySelector('a');
+      btnDown = main.querySelector('a'), 
+      menuItems = document.querySelectorAll('menu ul>li');
 
-    const scrollBlock = () => {
-      const href = btnDown.getAttribute('href'),
+    const scrollBlock = (btn) => {
+      const href = btn.getAttribute('href'),
         blockForScroll = document.querySelector(href),
         topBlock = blockForScroll.offsetTop;
 
@@ -159,10 +160,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
     btnDown.addEventListener('click', (e) => {
       e.preventDefault();
-      scrollBlock();
+      scrollBlock(btnDown);
     });
+
+    menuItems.forEach(item => item.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollBlock(e.target);
+    }));
 
   };
 
-  toggleBtnDown();
+  toggleScroll();
 });
