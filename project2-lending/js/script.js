@@ -140,13 +140,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   togglPopup();
 
-  // btn Down 
-  const toggleBtnDown = () => {
+  // scroll
+  const toggleScroll = () => {
     const main = document.querySelector('main'),
-      btnDown = main.querySelector('a');
+      btnDown = main.querySelector('a'),
+      menuItems = document.querySelectorAll('menu ul>li');
 
-    const scrollBlock = () => {
-      const href = btnDown.getAttribute('href'),
+    const scrollBlock = (btn) => {
+      const href = btn.getAttribute('href'),
         blockForScroll = document.querySelector(href),
         topBlock = blockForScroll.offsetTop;
 
@@ -171,12 +172,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
     btnDown.addEventListener('click', (e) => {
       e.preventDefault();
-      scrollBlock();
+      scrollBlock(btnDown);
     });
+
+    menuItems.forEach(item => item.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollBlock(e.target);
+    }));
 
   };
 
-  toggleBtnDown();
+  toggleScroll();
 
   // tabs 
   const tabs = () => {
@@ -394,7 +400,6 @@ window.addEventListener('DOMContentLoaded', () => {
         total = price * typeValue * squareValue * countValue * dayValue;
       }
 
-      // totalValue.textContent = total;
       animateSum(total);
     };
 
@@ -408,5 +413,84 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   calc(100);
+
+  // send-ajax-form
+  const sendForm = (form) => {
+    const errorMessage = 'Что-то пошло не так...',
+      loadMessage = 'Загрузка...',
+      successMessage = 'Спасибо! Мы скоро с вами свяжемся';
+
+    const statusMessage = document.createElement('div');
+    statusMessage.style.cssText = `
+      color: #fff;
+      font-size: 2rem;`;
+
+    // formValid
+    form.addEventListener('input', (e) => {
+      const target = e.target;
+      if (target.matches('input.form-phone')) {
+        target.value = target.value.replace(/[^\+\d)]/, '');
+      }
+      if (target.matches('input.form-name') || target.matches('input#form2-name') || target.matches('input.mess')) {
+        target.value = target.value.replace(/[^а-яё\s]/gi, '');
+      }
+    });
+
+    const postData = (body, outputData, errorData) => {
+      const request = new XMLHttpRequest();
+      request.addEventListener('readystatechange', () => {
+        if (request.readyState !== 4) {
+          return;
+        }
+
+        if (request.status === 200) {
+          outputData();
+        } else {
+          errorData(request.status);
+        }
+      });
+
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(body));
+    };
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      form.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+
+      const formData = new FormData(form),
+        formInputs = form.querySelectorAll('input');
+
+      let body = {};
+
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+
+      postData(body,
+        () => {
+          statusMessage.textContent = successMessage;
+          formInputs.forEach((item) => {
+            item.value = '';
+          });
+        },
+        (error) => {
+          statusMessage.textContent = errorMessage;
+          console.log(error);
+        }
+      );
+
+    });
+
+  };
+
+  const formMain = document.getElementById('form1'),
+    formQuestion = document.getElementById('form2'),
+    formPopup = document.getElementById('form3');
+  sendForm(formMain);
+  sendForm(formQuestion);
+  sendForm(formPopup);
 
 });
