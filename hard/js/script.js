@@ -1,34 +1,41 @@
+'use strict';
 const isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-const arr = [];
+let arr = [], arrItem, index = 1;
 
-for (let i = 0; i < 7; i++) {
+do {
   do {
-    arr[i] = prompt(`Введиите число (${i + 1}-ое)`);
-  } while (!isNumber(arr[i]));
-}
+    arrItem = prompt(`Введиите число (${index}-ое)`);
+  } while (!isNumber(arrItem));
+  index++;
+  arr.push(arrItem);
+} while (index <= 7);
 
 console.log(arr);
 
-for (let item of arr) {
-  if (item.match(/^2/) || item.match(/^4/)) {
-    console.log(item);
-  }
-}
+let filterArr = arr.filter((item) => (item.match(/^2/) || item.match(/^4/)));
 
-for (let i = 2; i <= 100; i++) {
-  let simpleNumber = true;
+console.log(filterArr);
 
-  for (let j = 2; j < i; j++) {
-    if (i % j === 0) {
-      simpleNumber = false;
-      break;
-    }
-  }
+let numSimple = [];
+index = 1;
+do {
+  numSimple.push(index);
+  index++;
+} while (index <= 100);
 
-  if (simpleNumber) {
-    console.log(i, `Делители этого числа: 1 и ${i}`);
+numSimple.filter((item) => {
+  if (item > 2) {
+    index = 2;
+    do {
+      if (item % index === 0) {
+        return false;
+      }
+      index++;
+    } while (index < item);
   }
-}
+  console.log(item, `Делители этого числа: 1 и ${item}`);
+  return true;
+});
