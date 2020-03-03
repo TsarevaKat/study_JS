@@ -1,8 +1,8 @@
 'use strict';
 
 const isNumber = function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  };
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
 // isText = function (e) {
 
 //   // if (reg.test(value)) {
@@ -95,7 +95,9 @@ let appData = {
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, btnAddExpenses);
     expensesItems = document.querySelectorAll('.expenses-items');
     textInputs = document.querySelectorAll('input[placeholder="Наименование"]');
-      sumInputs = document.querySelectorAll('input[placeholder="Сумма"]');
+    sumInputs = document.querySelectorAll('input[placeholder="Сумма"]');
+    appData.validateInputText();
+    appData.validateInputNumb();
     if (expensesItems.length === 3) {
       btnAddExpenses.style.display = 'none';
     }
