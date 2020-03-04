@@ -436,23 +436,26 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    const postData = (body, outputData, errorData) => {
-      const request = new XMLHttpRequest();
-      request.addEventListener('readystatechange', () => {
-        if (request.readyState !== 4) {
-          return;
-        }
+    const postData = (body) => {
+      return new Promise((resolve, reject) => {
 
-        if (request.status === 200) {
-          outputData();
-        } else {
-          errorData(request.status);
-        }
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+          if (request.readyState !== 4) {
+            return;
+          }
+
+          if (request.status === 200) {
+            resolve();
+          } else {
+            reject(request.status);
+          }
+        });
+
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify(body));
       });
-
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(body));
     };
 
     form.addEventListener('submit', (event) => {
@@ -469,18 +472,20 @@ window.addEventListener('DOMContentLoaded', () => {
         body[key] = val;
       });
 
-      postData(body,
-        () => {
-          statusMessage.textContent = successMessage;
-          formInputs.forEach((item) => {
-            item.value = '';
-          });
-        },
-        (error) => {
-          statusMessage.textContent = errorMessage;
-          console.log(error);
-        }
-      );
+      postData(body)
+        .then(
+          () => {
+            statusMessage.textContent = successMessage;
+            formInputs.forEach((item) => {
+              item.value = '';
+            });
+          })
+        .catch(
+          (error) => {
+            statusMessage.textContent = errorMessage;
+            console.log(error);
+          }
+        );
 
     });
 
