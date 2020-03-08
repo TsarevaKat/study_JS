@@ -190,10 +190,12 @@
       <h2>Рассчитать стоимость</h2>
       <div class="underline"></div>
       <div class="row">
-        <div class="col-lg-6 d-none d-lg-block flex">
+        <!-- убран класс flex - некорретное отобращение в IE -->
+        <div class="col-lg-6 d-none d-lg-block">
           <img src="images/calc.jpg" alt="">
         </div>
-        <div class="col-lg-6 col-12 flex">
+        <!-- убран класс flex - некорретное отобращение в IE -->
+        <div class="col-lg-6 col-12">
           <div class="calc-block">
             <select class="calc-item calc-type" required>
               <option class="calc-option-title" value="">Выберите тип объекта*</option>
@@ -326,23 +328,33 @@
 
         <div class="col-md-4 col-sm-4 col-12">
           <div class="connect-adress">
-            <img src="images/connect/phone.svg" alt="">
+            <div class="social-icon">
+              <img src="images/connect/phone.svg" alt="">
+            </div>
             <p>+ 7 843 249 00 64</p>
           </div>
           <div class="connect-adress">
-            <img src="images/connect/whatsapp.svg" alt="">
+            <div class="social-icon">
+              <img src="images/connect/whatsapp.svg" alt="">
+            </div>
             <p>+ 7 843 249 00 64</p>
           </div>
           <div class="connect-adress">
-            <img src="images/connect/letter.svg" alt="">
+            <div class="social-icon">
+              <img src="images/connect/letter.svg" alt="">
+            </div>
             <p>manager@glo-academy.ru</p>
           </div>
           <div class="connect-adress">
-            <img src="images/connect/skype.svg" alt="">
+            <div class="social-icon">
+              <img src="images/connect/skype.svg" alt="">
+            </div>
             <p>skype: glo-academy</p>
           </div>
           <div class="connect-adress">
-            <img src="images/connect/tele.svg" alt="">
+            <div class="social-icon">
+              <img src="images/connect/tele.svg" alt="">
+            </div>
             <p>telegram: glo-academy</p>
           </div>
           <p>График работы: с 9-00 до 18-00. Пн.-Пт.</p>
@@ -366,11 +378,19 @@
           <a href="#">Новости</a><br>
           <a href="#">Договор публичной оферты</a><br>
         </div>
-        <div class="col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-0 col-12 col-offset-0">
+        <div class="col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-0 col-12 col-offset-0 social-wrap">
           <p>Мы в социальных сетях:</p>
-          <a href=""><img src="images/footer/face.svg" alt=""></a>
-          <a href=""><img src="images/footer/google.svg" alt=""></a>
-          <a href=""><img src="images/footer/insta.svg" alt=""></a>
+          <div class="social">
+            <a href="#" class="social-icon">
+              <img src="images/footer/face.svg" alt="">
+            </a>
+            <a href="#" class="social-icon">
+              <img src="images/footer/google.svg" alt="">
+            </a>
+            <a href="#" class="social-icon">
+              <img src="images/footer/insta.svg" alt="">
+            </a>
+          </div>
         </div>
       </div>
       <div class="line"></div>

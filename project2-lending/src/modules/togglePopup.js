@@ -4,7 +4,7 @@ const togglePopup = () => {
 
   const popupOpen = () => {
     popup.style.display = 'block';
-    if (screen.width >= 768) {
+    if (screen.width > 768) {
       popup.style.transform = 'translateY(-100%)';
       let start = Date.now();
       const open = setInterval(() => {

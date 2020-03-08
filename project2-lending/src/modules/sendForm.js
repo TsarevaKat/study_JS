@@ -14,8 +14,10 @@ const sendForm = (form) => {
     if (target.matches('input.form-phone')) {
       target.value = target.value.replace(/[^\+\d)]/, '');
     }
-    if (target.matches('input.form-name') || target.matches('input#form2-name') || target.matches('input.mess')) {
+    if (target.matches('input.form-name') || target.matches('input#form2-name')) {
       target.value = target.value.replace(/[^а-яё\s]/gi, '');
+    } else if ( target.matches('input.mess')) {
+      target.value = target.value.replace(/[^а-яё\s\d\?\!,\.:;-]/gi, '');
     }
   });
 
